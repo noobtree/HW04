@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include <unordered_map>
-#include <initializer_list>
 #include "ItemObject.h"
 
 namespace std {
@@ -24,10 +23,11 @@ namespace Alchemist {
 	public:
 		// Constructor
 		ItemRecipe(const ItemObject resultItem);
-		ItemRecipe(const ItemObject resultItem, const std::initializer_list<std::pair<ItemObject, uint8_t>> ingredientsList);
+		ItemRecipe(const ItemObject resultItem, const std::unordered_map<ItemObject, uint32_t> ingredients);
 
 		// prevent copy
-		ItemRecipe(const ItemRecipe& other) = delete;
+		ItemRecipe(const ItemRecipe& other);
+		ItemRecipe operator=(const ItemRecipe& other);
 
 		virtual ~ItemRecipe();
 
@@ -45,42 +45,37 @@ namespace Alchemist {
 		/// <param name="count">재료 개수</param>
 		void RemoveIngredient(const ItemObject& ingredient, const uint32_t count = 1);
 
-		/// <summary>
-		/// 제작법을 출력
-		/// </summary>
-		void ShowRecipe() const;
+		// 레시피를 출력
+		void DisplayRecipe() const;
 
 		// 레시피 이름
 		std::string GetRecipeName() const;
 
 		// 재료 목록
-		std::unordered_map<ItemObject, uint8_t> GetIngredients() const;
+		std::unordered_map<ItemObject, uint32_t> GetIngredients() const;
 		// 제작 결과물
 		std::shared_ptr<ItemObject> GetResultItem() const;
+
+		// 비어있는 아이템 레시피
+		static const ItemRecipe GetEmptyRecipe();
 		
 		void SetResultItem(const std::shared_ptr<ItemObject> value);
+
+		bool operator==(const ItemRecipe& other);
+		bool operator!=(const ItemRecipe& other);
 
 	protected:
 		/// <summary>
 		/// 재료 목록 { 재료 아이템, 재료 개수 }
 		/// </summary>
-		std::unordered_map<ItemObject, uint8_t> ingredients;
+		std::unordered_map<ItemObject, uint32_t> ingredients;
 
 		/// <summary>
 		/// 제작 결과물
 		/// </summary>
 		std::shared_ptr<ItemObject> resultItem;
-	};
+	private:
 
-	// PotionRecipe 클래스: 재료 목록을 vector<string>으로 변경
-	class PotionRecipe {
-	public:
-		std::string potionName;
-		std::vector<std::string> ingredients; // 단일 재료에서 재료 '목록'으로 변경
-
-		// 생성자: 재료 목록을 받아 초기화하도록 수정
-		PotionRecipe(const std::string& name, const std::vector<std::string>& ingredients)
-			: potionName(name), ingredients(ingredients) {
-		}
+		ItemRecipe() : resultItem(nullptr) {}
 	};
 }

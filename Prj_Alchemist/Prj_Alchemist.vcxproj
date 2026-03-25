@@ -123,7 +123,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ExtraItem.cpp" />
     <ClCompile Include="ItemObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PotionItem.cpp" />
@@ -131,7 +130,6 @@
     <ClCompile Include="Workbench.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ExtraItem.h" />
     <ClInclude Include="ItemObject.h" />
     <ClInclude Include="PotionItem.h" />
     <ClInclude Include="ItemRecipe.h" />

@@ -4,7 +4,6 @@
 
 namespace Alchemist {
 	enum class EItemType {
-		Extra,	// 기타 아이템
 		Potion	// 포션 아이템
 	};
 
@@ -38,7 +37,7 @@ namespace Alchemist {
 
 	protected:
 		ItemObject(EItemType type);
-		ItemObject(EItemType type, std::string name, std::string description);
+		ItemObject(EItemType type, std::string name, std::string description = "");
 
 		/// <summary>
 		/// 아이템 이름

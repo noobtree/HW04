@@ -6,7 +6,7 @@ namespace Alchemist {
 	{
 	public:
 		PotionItem();
-		PotionItem(std::string name, std::string description);
+		PotionItem(std::string name, std::string description = "");
 
 		PotionItem(const PotionItem& other);
 		PotionItem operator=(const PotionItem& other);
